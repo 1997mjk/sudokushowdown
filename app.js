@@ -19,7 +19,8 @@ var cool = require('cool-ascii-faces');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 //mongoose.connect('mongodb://heroku_12345678:random_password@ds029017.mLab.com:29017/heroku_12345678');
-var mongodbUri = 'mongodb://heroku_h5x90jjk:dd6t2ic8b2i9g1bt4sjuhsf2mu@ds025399.mLab.com:25399/heroku_h5x90jjk';
+var mongodbUri = 'mongodb://heroku_wzd0fsz6:16k5pojt8r5ek7usa5qu672jhs@ds025439.mlab.com:25439/heroku_wzd0fsz6';
+
 // mongoose.connect(process.env.MONGOLAB_URI);
 mongoose.connect(mongodbUri);
 var db = mongoose.connection;
@@ -32,7 +33,8 @@ var userSchema = mongoose.Schema({
 	password: String,
 	win: String,
 	loss: String,
-	draw: String
+	draw: String,
+	MMR:String
 });
 userSchema.methods.validPassword = function( pwd ) {
     // EXAMPLE CODE!
@@ -124,7 +126,8 @@ app.post('/signup', function(req,res){
 		password: req.body.password,
 		win: '0',
 		loss: '0',
-		draw: '0'
+		draw: '0',
+		MMR: '1000'
 	});
 
 	user.save(function(err){
