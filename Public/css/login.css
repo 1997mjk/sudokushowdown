@@ -1,0 +1,31 @@
+.btn {
+    background-color: white;
+    border-bottom: 10px;
+}
+
+#messagesDiv {
+    padding-left: 10px;
+    border-radius: 5px, 0px, 0px, 0px;
+}
+ h1 {
+    margin: 1em 0 0.5em 0;
+    color: #343434;
+    font-weight: normal;
+    font-family: 'Ultra', sans-serif;   
+    font-size: 36px;
+    line-height: 42px;
+    text-transform: uppercase;
+    text-shadow: 0 2px white, 0 3px #777;
+}
+body {
+  background-color: #DADADA;
+}
+body > .grid {
+  height: 100%;
+}
+.image {
+  margin-top: -100px;
+}
+.column {
+  max-width: 450px;
+}

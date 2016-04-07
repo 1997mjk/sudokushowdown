@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Sudoku</title>
+  <link rel="stylesheet" type="text/css" href="css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/animator.min.js"></script>
+  <script type="text/javascript" src="js/underscore.min.js"></script>
+  <script type="text/javascript" src="js/final.js"></script>
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/site.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/container.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/grid.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/header.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/image.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/menu.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/divider.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/segment.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/form.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/input.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/button.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/list.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/message.css">
+  <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/icon.css">
+  <script src="Semantic-UI-CSS-master/dist/components/form.js"></script>
+  <script src="Semantic-UI-CSS-master/dist/components/transition.js"></script>
+  <!-- //////// CHAT BOX SCRIPT////////// -->
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script type="text/javascript" src="js/chat.js"></script>
+
+  <!-- //////////CHAT BOX STYLE ////////////// -->
+<style>
+.btn {
+  background-color: white;
+  border-bottom: 10px;
+}
+
+#messagesDiv {
+  padding-left: 10px;
+  border-radius: 5px, 0px, 0px, 0px;
+}
+
+
+</style>
+<script src="/socket.io/socket.io.js"></script>
+<!-- ////////////////////////////////// -->
+</head>
+
+<body bgcolor="#DDDDDD">
+<div class="ui attached stackable menu">
+  <div class="ui container">
+    <a class="item">
+      <i class="home icon"><a href="/logout">log out</a></i>
+    </a>
+    <a class="item">
+      <i class="grid layout icon"></i> Browse
+    </a>
+    <a class="item">
+      <i class="mail icon"></i> Messages
+    </a>
+    <div class="ui simple dropdown item">
+      More
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item"><i class="edit icon"></i> Edit Profile</a>
+        <a class="item"><i class="globe icon"></i> Choose Language</a>
+        <a class="item"><i class="settings icon"></i> Account Settings</a>
+      </div>
+    </div>
+    <div class="right item">
+      <div class="ui input"><input type="text" placeholder="Search for a room..."></div>
+    </div>
+  </div>
+</div>
+<!-- ///////////////////////////////// -->
+<div id='leftSide'>
+  <div class="game">
+    <div class="board">
+      <div class="row" id="row1">
+        <div class="cell"><div class="cornerBox"><button class='box' img='maxresdefault' width="10px" height="10px"></div></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+      <div class="row" id="row2">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+      <div class="row" id="row3">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+      <div class="row" id="row4">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+      <div class="row" id="row5">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+      <div class="row" id="row6">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+      <div class="row" id="row7">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+      <div class="row" id="row8">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+      <div class="row" id="row9">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- //////////// CHAT BOX //////////////// -->
+<div id="rightSide">
+    <div style="height:auto; width:auto">
+      <div id='messagesDiv' wrap = "hard" style = "color: black; overflow-y: scroll; height: 700px; width: 100%; background-color: lightgray; opacity: 0.85; white-space: nowrap; position: relative"></div>
+    </div>
+        <span>
+          <input type='text' id='nameInput' disabled = 'true' placeholder='Name' style = "width:100px; margin-left: 0; margin-right: 0">
+          <input type='text' id='messageInput' placeholder='Message (less than 40 characters)' style = "width:290px; margin-left: 0; margin-right: 0">
+          <button id = "hide_button"style = "width:50px; margin-left: 0; margin-right: 0">Hide</button>
+          <button id="clear_button" style = "width:50px; margin-left: 0; margin-right: 0">Clear</button>
+        </span>
+</div>
+<!-- ////////////////////////////////////// -->
+</body>
+</html>
