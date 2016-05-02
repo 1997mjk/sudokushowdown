@@ -28,11 +28,11 @@ var User = mongoose.model('Users', userSchema);
 router.get('/', ensureAuthenticated, function(req, res){
 	res.render('home', { //guestBoard.ejs
 		title: 'Home Page',
-		username: User.username,
-		win: User.win,
-		loss: User.loss,
-		draw: User.draw,
-		MMR: User.MMR,
+		// username: User.username,
+		// win: User.win,
+		// loss: User.loss,
+		// draw: User.draw,
+		// MMR: User.MMR,
 		isAuthenticated: req.isAuthenticated(),
 		user: req.user
 	});
