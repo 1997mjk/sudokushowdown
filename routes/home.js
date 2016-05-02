@@ -34,7 +34,12 @@ router.get('/', ensureAuthenticated, function(req, res){
 		// draw: User.draw,
 		// MMR: User.MMR,
 		isAuthenticated: req.isAuthenticated(),
-		user: req.user
+		user: req.user.username,
+		win: req.user.win,
+		loss: req.user.loss,
+		draw: req.user.draw,
+		MMR: req.user.MMR
+		
 	});
 });
 
