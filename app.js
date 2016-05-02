@@ -18,10 +18,10 @@ var cool = require('cool-ascii-faces');
 
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
-//mongoose.connect('mongodb://heroku_12345678:random_password@ds029017.mLab.com:29017/heroku_12345678');
+
+//MONGO CONNECTION
 var mongodbUri = 'mongodb://heroku_wzd0fsz6:16k5pojt8r5ek7usa5qu672jhs@ds025439.mlab.com:25439/heroku_wzd0fsz6';
 
-// mongoose.connect(process.env.MONGOLAB_URI);
 mongoose.connect(mongodbUri);
 var db = mongoose.connection;
 
@@ -156,21 +156,21 @@ app.post('/signup', function(req,res){
 io.on('connection', function(socket){
 	var addedUser = false;
 	
-	socket.join('lobby');
+	// socket.join('lobby');
 
-	socket.on('create', function(username){
-		//create a room and join
-		//call create function to all
-		socket.broadcast.emit('showRoom');
-		//call join for requester
-		socket.to(id).emit('joinRoom');
-	});
+	// socket.on('create', function(username){
+	// 	//create a room and join
+	// 	//call create function to all
+	// 	socket.broadcast.emit('showRoom');
+	// 	//call join for requester
+	// 	socket.to(id).emit('joinRoom');
+	// });
 
-	socket.on('join',  function(room){
-		//join an existing room
-		socket.to(id).emit('joinRoom');
+	// socket.on('join',  function(room){
+	// 	//join an existing room
+	// 	socket.to(id).emit('joinRoom');
 
-	});
+	// });
 
 	socket.on('target', function(id, list){
 		var index = list[0];

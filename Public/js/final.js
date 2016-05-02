@@ -18,7 +18,6 @@ $(function() {
         '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
     ];
 
-    var username;
 
     $(document.body).bind('click', function() {
         if ($selected.length > 0) {
