@@ -12,6 +12,13 @@ $(function() {
     var templates        = null;
     var gameLoaderHandle = null;
     var socket = io();
+    var COLORS = [
+        '#e21400', '#91580f', '#f8a700', '#f78b00',
+        '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
+        '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
+    ];
+
+    var username;
 
     $(document.body).bind('click', function() {
         if ($selected.length > 0) {
@@ -196,3 +203,11 @@ $(function() {
     }
     initializeBoard();
 });
+
+//When users join, all will be assigned to room0 (which will denote the lobby)
+//This is to be done on socket.on('adduser');
+//Then, when they create rooms and enter a board-page, they will switch to a new room
+//This new room should have a number > 1 assigned, to which it will be the room number
+//you can find the origin of socket call with io.sockets.in(socket.room).emit('updatechat', socket.username, data); I think
+//see http://psitsmike.com/2011/10/node-js-and-socket-io-multiroom-chat-tutorial/
+//

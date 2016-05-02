@@ -1,10 +1,128 @@
-<html><head><title>Main User Page</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="../css/home.css" rel="stylesheet" type="text/css">
-    </head><body>
-
-<div class="navbar navbar-default navbar-static-top"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="#"><span>Interactive Sudoku</span><br><br></a></div><div class="collapse navbar-collapse" id="navbar-ex-collapse"><ul class="nav navbar-nav navbar-right"><li class="active"><a href="#">Home</a></li><li><a href="#">Contacts</a></li></ul><ul class="nav navbar-nav navbar-right"><li class="active"><a href="#">Home</a></li><li><a href="#">Contacts</a></li></ul><ul class="nav navbar-nav navbar-right"><li class="active"><a href="#">Home</a></li><li><a href="#">Contacts</a></li></ul></div></div></div><div class="section"><div class="container"><div class="row"><div class="col-md-12"><div class="col-md-3 padded-side-div"><div class="row padded-side-div"><div class="col-md-12"><div class="btn-link panel panel-info"><div class="panel-heading"><h3 class="panel-title">User Statistics</h3></div><div class="panel-body"><div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="http://www.youtube.com/embed/i__1Z5a9Sak" allowfullscreen=""></iframe></div></div></div></div></div><div class="row padded-side-div"><div class="col-md-12"><div class="btn-link panel panel-info"><div class="panel-heading"><h3 class="panel-title">Game Creation</h3></div><div class="panel-body"><div class="btn-group btn-group-lg"><a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Dropdown <span class="fa fa-caret-down"></span></a><ul class="dropdown-menu" role="menu"><li><a href="#">Action</a></li><li><a href="#">Action</a></li><li><a href="#">Action</a></li></ul></div><a class="btn btn-primary">Click me</a><p>Panel content</p></div></div></div></div></div><div class="col-md-6 padded-div"><div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title text-primary">Sudoku Board</h3></div><div class="panel-body"><p>Panel content</p></div></div></div><div class="col-md-3 padded-side-div"><div class="row padded-side-div"><div class="col-md-12"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title text-muted">AD Content</h3></div><div class="panel-body"><div id="carousel-example" data-interval="false" class="carousel slide" data-ride="carousel"><div class="carousel-inner"><div class="item active"><img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"><div class="carousel-caption"><h2>Title</h2><p>Description</p></div></div></div><a class="left carousel-control" href="#carousel-example" data-slide="prev"><i class="icon-prev  fa fa-angle-left"></i></a><a class="right carousel-control" href="#carousel-example" data-slide="next"><i class="icon-next fa fa-angle-right"></i></a></div></div></div></div></div><div class="row padded-side-div"><div class="col-md-12"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title text-warning">Chat Panel</h3></div><div class="panel-body"><p>Panel content</p></div></div></div></div></div></div></div></div></div></body></html>
+<html>
+   <head>
+      <title>Main User Page</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+      <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+      <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <link href="../css/home.css" rel="stylesheet" type="text/css">
+   </head>
+   <body>
+      <div class="navbar navbar-default navbar-static-top">
+         <div class="container">
+            <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="#"><span>Interactive Sudoku</span><br><br></a></div>
+            <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+               <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">Contacts</a></li>
+               </ul>
+               <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">Contacts</a></li>
+               </ul>
+               <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">Contacts</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="section">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="col-md-3 padded-side-div">
+                     <div class="row padded-side-div">
+                        <div class="col-md-12">
+                           <div class="btn-link panel panel-info">
+                              <div class="panel-heading">
+                                 <h3 class="panel-title">User Statistics</h3>
+                              </div>
+                              <div class="panel-body">
+                                 <div><%= username %></div>
+                                 <span>
+                                    Win: <%= win %> 
+                                    Loss: <%= loss %> 
+                                    Tie: <%= draw %>
+                                    MMR: <%= MMR %>
+                                 </span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row padded-side-div">
+                        <div class="col-md-12">
+                           <div class="btn-link panel panel-info">
+                              <div class="panel-heading">
+                                 <h3 class="panel-title">Game Creation</h3>
+                              </div>
+                              <div class="panel-body">
+                                 <div class="btn-group btn-group-lg">
+                                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Dropdown <span class="fa fa-caret-down"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                       <li><a href="#">Action</a></li>
+                                       <li><a href="#">Action</a></li>
+                                       <li><a href="#">Action</a></li>
+                                    </ul>
+                                 </div>
+                                 <a class="btn btn-primary">Click me</a>
+                                 <p>Panel content</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6 padded-div">
+                     <div class="panel panel-primary">
+                        <div class="panel-heading">
+                           <h3 class="panel-title text-primary">Sudoku Board</h3>
+                        </div>
+                        <div class="panel-body">
+                           <p>Panel content</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-3 padded-side-div">
+                     <div class="row padded-side-div">
+                        <div class="col-md-12">
+                           <div class="panel panel-info">
+                              <div class="panel-heading">
+                                 <h3 class="panel-title text-muted">AD Content</h3>
+                              </div>
+                              <div class="panel-body">
+                                 <div id="carousel-example" data-interval="false" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                       <div class="item active">
+                                          <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png">
+                                          <div class="carousel-caption">
+                                             <h2>Title</h2>
+                                             <p>Description</p>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <a class="left carousel-control" href="#carousel-example" data-slide="prev"><i class="icon-prev  fa fa-angle-left"></i></a><a class="right carousel-control" href="#carousel-example" data-slide="next"><i class="icon-next fa fa-angle-right"></i></a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row padded-side-div">
+                        <div class="col-md-12">
+                           <div class="panel panel-info">
+                              <div class="panel-heading">
+                                 <h3 class="panel-title text-warning">Chat Panel</h3>
+                              </div>
+                              <div class="panel-body">
+                                 <p>Panel content</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

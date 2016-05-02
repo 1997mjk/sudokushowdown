@@ -34,7 +34,7 @@ var userSchema = mongoose.Schema({
 	win: String,
 	loss: String,
 	draw: String,
-	MMR:String
+	MMR: String
 });
 userSchema.methods.validPassword = function( pwd ) {
     // EXAMPLE CODE!
@@ -154,30 +154,51 @@ app.post('/signup', function(req,res){
 //===============================================
 
 io.on('connection', function(socket){
-	socket.on('target', function(list){
+	var addedUser = false;
+	
+	socket.join('lobby');
+
+	socket.on('create', function(username){
+		//create a room and join
+		//call create function to all
+		socket.broadcast.emit('showRoom');
+		//call join for requester
+		socket.to(id).emit('joinRoom');
+	});
+
+	socket.on('join',  function(room){
+		//join an existing room
+		socket.to(id).emit('joinRoom');
+
+	});
+
+	socket.on('target', function(id, list){
 		var index = list[0];
 		var numberSubmmitted = list[1];
 
 		var solution = "435269781682571493197834562826195347374682915951743628519326874248957136763418259";
         if(solution[index]==numberSubmmitted){ //correct answer
         	console.log('correct answer received');
-        	socket.broadcast.emit('correct', [index, numberSubmmitted]);
-        	socket.emit('correct', [index, numberSubmmitted]);
+        	socket.broadcast.to(id).emit('correct', [index, numberSubmmitted]);
+        	socket.to(id).emit('correct', [index, numberSubmmitted]);
         }
         else if(numberSubmmitted != ''){ //did not enter anythign
         	var coloration = "#FFFF88";
-        	socket.broadcast.emit('incorrect', [index, numberSubmmitted], coloration);
-        	socket.emit('incorrect', [index, numberSubmmitted], coloration);
+        	socket.broadcast.to(id).emit('incorrect', [index, numberSubmmitted], coloration);
+        	socket.to(id).emit('incorrect', [index, numberSubmmitted], coloration);
         }
         else{ //wrong number submitted
-        	socket.broadcast.emit('empty', [index, numberSubmmitted]);
-        	socket.emit('empty', [index, numberSubmmitted]);
+        	socket.broadcast.to(id).emit('empty', [index, numberSubmmitted]);
+        	socket.to(id).emit('empty', [index, numberSubmmitted]);
         }
 	});
 
-	socket.on('add user', function(username){
+	socket.on('adduser', function(username){
+		if(addedUser) return;
+
 		//store the username in socket session 
 		socket.username = username;
+		addedUser = true;
 
 		//echo globally (all clients) that a person has connected
 		socket.broadcast.emit('user joined', {
