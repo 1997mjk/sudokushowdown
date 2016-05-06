@@ -31,7 +31,12 @@ $(function() {
 
     $legend.delegate('.cell', 'click', function(e){
         e.preventDefault();
+        e.stopPropagation();
 
+        if($selected.length > 0){
+            closeCellInput($selected);
+        }
+        
         var $this = $(this);
         var state = $this.text();
 
