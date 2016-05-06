@@ -12,6 +12,7 @@ $(function() {
     var templates        = null;
     var gameLoaderHandle = null;
     var socket = io();
+    
     var COLORS = [
         '#e21400', '#91580f', '#f8a700', '#f78b00',
         '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
@@ -36,7 +37,7 @@ $(function() {
     //     if($selected.length > 0){
     //         closeCellInput($selected);
     //     }
-        
+
     //     var $this = $(this);
     //     var state = $this.text();
 
@@ -223,14 +224,14 @@ $(function() {
         }
     }
 
-    function waitForPlayers(){
-        initializeBoard(); //FOR NOW
-    };
-    waitForPlayers();
+    // function waitForPlayers(){
+    //     initializeBoard(); //FOR NOW
+    // };
+    initializeBoard();
 
-    socket.on('startGame', function(){
-        initializeBoard();
-    });
+    // socket.on('startGame', function(){
+    //     initializeBoard();
+    // });
 });
 
 //When users join, all will be assigned to room0 (which will denote the lobby)
