@@ -121,3 +121,37 @@ strong {
     width: 10px;
     height: 10px;
 }
+
+.game .legend{
+    margin: auto;
+    width: 523px;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+}
+.game .legend .row{
+    height: 55px;
+    margin: 20px 0;
+}
+
+.game .legend .cell{
+    position: relative;
+    float: left;
+    width: 200px;
+    height: 50px;
+    margin: 0 3px 0 3px;
+    border: 1px solid #CCCCCC;
+    line-height: 50px;
+    text-align: center;
+    font-size: 30px;
+    background-color: #D7EEFB;
+    color: #555555;
+    border-radius: 8px;
+    box-shadow: 3px 3px 3px #DDDDDD;
+    cursor: pointer;
+
+}
+.game .legend .cell.disabled{
+    color: #AAAAAA;
+    cursor: default;
+    opacity: 0.2;
+}

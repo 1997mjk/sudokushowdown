@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <title>Sudoku</title>
-  <link rel="stylesheet" type="text/css" href="../css/reset.css" />
-  <link rel="stylesheet" type="text/css" href="../css/style.css" />
-  <script type="text/javascript" src="../js/jquery.min.js"></script>
-  <script type="text/javascript" src="../js/animator.min.js"></script>
-  <script type="text/javascript" src="../js/underscore.min.js"></script>
-  <script type="text/javascript" src="../js/final.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/animator.min.js"></script>
+  <script type="text/javascript" src="js/underscore.min.js"></script>
+  <script type="text/javascript" src="js/final.js"></script>
   <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/site.css">
   <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/container.css">
   <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/dist/components/grid.css">
@@ -27,7 +27,7 @@
   <script src="Semantic-UI-CSS-master/dist/components/transition.js"></script>
   <!-- //////// CHAT BOX SCRIPT////////// -->
   <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-  <script type="text/javascript" src="../js/chat.js"></script>
+  <script type="text/javascript" src="js/chat.js"></script>
 
   <!-- //////////CHAT BOX STYLE ////////////// -->
 <style>
@@ -43,6 +43,7 @@
 
 
 </style>
+<script src="/socket.io/socket.io.js"></script>
 <!-- ////////////////////////////////// -->
 </head>
 
@@ -50,7 +51,7 @@
 <div class="ui attached stackable menu">
   <div class="ui container">
     <a class="item">
-      <i class="home icon"></i> Home
+      <i class="home icon"><a href="/logout">log out</a></i>
     </a>
     <a class="item">
       <i class="grid layout icon"></i> Browse
@@ -176,8 +177,19 @@
         <div class="cell"></div>
       </div>
     </div>
+
+    <div class="legend">
+      <div class="row">
+        <div class="cell">Start</div>
+        <div class="cell">Ready</div>
+      </div>
+    </div>
+
   </div>
 </div>
+
+
+
 <!-- //////////// CHAT BOX //////////////// -->
 <div id="rightSide">
     <div style="height:auto; width:auto">

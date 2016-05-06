@@ -200,7 +200,15 @@ $(function() {
             $cell.text(number).addClass(cellState);
         }
     }
-    initializeBoard();
+
+    function waitForPlayers(){
+
+    };
+    waitForPlayers();
+
+    socket.on('startGame', function(){
+        initializeBoard();
+    });
 });
 
 //When users join, all will be assigned to room0 (which will denote the lobby)
