@@ -172,7 +172,7 @@ io.on('connection', function(socket){
 
 	// });
 
-	socket.on('target', function(id, list){
+	socket.on('target', function(list){
 		var index = list[0];
 		var numberSubmmitted = list[1];
 
