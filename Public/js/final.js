@@ -39,7 +39,7 @@ $(function() {
         $selected = $([]);
 
         console.log(state);
-        if(state.equals('Ready')){
+        if(state == 'Ready'){
             console.log('i am ready');
         }
 
