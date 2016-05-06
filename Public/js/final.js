@@ -12,7 +12,7 @@ $(function() {
     var templates        = null;
     var gameLoaderHandle = null;
     var socket = io();
-    
+
     var COLORS = [
         '#e21400', '#91580f', '#f8a700', '#f78b00',
         '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
@@ -30,27 +30,27 @@ $(function() {
         }
     });
 
-    // $legend.delegate('.cell', 'click', function(e){
-    //     e.preventDefault();
-    //     e.stopPropagation();
+    $legend.delegate('.cell', 'click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
 
-    //     if($selected.length > 0){
-    //         closeCellInput($selected);
-    //     }
+        if($selected.length > 0){
+            closeCellInput($selected);
+        }
 
-    //     var $this = $(this);
-    //     var state = $this.text();
+        var $this = $(this);
+        var state = $this.text();
 
-    //     $selected.empty();
-    //     $selected = $([]);
+        $selected.empty();
+        $selected = $([]);
 
-    //     console.log(state);
-    //     if(state == 'Ready'){
-    //         console.log('i am ready');
-    //     }
+        console.log(state);
+        if(state == 'Ready'){
+            console.log('i am ready');
+        }
 
-    //     return;
-    // });
+        return;
+    });
 
     $board.delegate('.cell.empty', 'click', function(e){
         e.preventDefault();
@@ -224,10 +224,10 @@ $(function() {
         }
     }
 
-    // function waitForPlayers(){
-    //     initializeBoard(); //FOR NOW
-    // };
-    initializeBoard();
+    function waitForPlayers(){
+        initializeBoard(); //FOR NOW
+    };
+    waitForPlayers();
 
     // socket.on('startGame', function(){
     //     initializeBoard();

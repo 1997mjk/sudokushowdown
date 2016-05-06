@@ -179,17 +179,20 @@ io.on('connection', function(socket){
 		var solution = "435269781682571493197834562826195347374682915951743628519326874248957136763418259";
         if(solution[index]==numberSubmmitted){ //correct answer
         	console.log('correct answer received');
-        	socket.broadcast.to(id).emit('correct', [index, numberSubmmitted]);
-        	socket.to(id).emit('correct', [index, numberSubmmitted]);
+        	// socket.broadcast.to(id).emit('correct', [index, numberSubmmitted]);
+        	// socket.to(id).emit('correct', [index, numberSubmmitted]);
+        	socket.broadcast.emit('correct', [index, numberSubmmitted]);
+        	socket.emit('correct', [index, numberSubmmitted]);
+        	
         }
         else if(numberSubmmitted != ''){ //did not enter anythign
         	var coloration = "#FFFF88";
-        	socket.broadcast.to(id).emit('incorrect', [index, numberSubmmitted], coloration);
-        	socket.to(id).emit('incorrect', [index, numberSubmmitted], coloration);
+        	socket.broadcast.emit('incorrect', [index, numberSubmmitted], coloration);
+        	socket.emit('incorrect', [index, numberSubmmitted], coloration);
         }
         else{ //wrong number submitted
-        	socket.broadcast.to(id).emit('empty', [index, numberSubmmitted]);
-        	socket.to(id).emit('empty', [index, numberSubmmitted]);
+        	socket.broadcast.emit('empty', [index, numberSubmmitted]);
+        	socket.emit('empty', [index, numberSubmmitted]);
         }
 	});
 
