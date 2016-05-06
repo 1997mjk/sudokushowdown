@@ -29,6 +29,23 @@ $(function() {
         }
     });
 
+    $legend.delegate('.cell', 'click', function(e){
+        e.preventDefault();
+
+        var $this = $(this);
+        var state = $this.text();
+
+        $selected.empty();
+        $selected = $([]);
+
+        console.log(state);
+        if(state.equals('Ready')){
+            console.log('i am ready');
+        }
+
+        return;
+    });
+
     $board.delegate('.cell.empty', 'click', function(e){
         e.preventDefault();
         e.stopPropagation();
@@ -202,7 +219,7 @@ $(function() {
     }
 
     function waitForPlayers(){
-
+        initializeBoard(); //FOR NOW
     };
     waitForPlayers();
 
