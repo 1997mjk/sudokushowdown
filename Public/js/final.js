@@ -29,27 +29,27 @@ $(function() {
         }
     });
 
-    $legend.delegate('.cell', 'click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
+    // $legend.delegate('.cell', 'click', function(e){
+    //     e.preventDefault();
+    //     e.stopPropagation();
 
-        if($selected.length > 0){
-            closeCellInput($selected);
-        }
+    //     if($selected.length > 0){
+    //         closeCellInput($selected);
+    //     }
         
-        var $this = $(this);
-        var state = $this.text();
+    //     var $this = $(this);
+    //     var state = $this.text();
 
-        $selected.empty();
-        $selected = $([]);
+    //     $selected.empty();
+    //     $selected = $([]);
 
-        console.log(state);
-        if(state == 'Ready'){
-            console.log('i am ready');
-        }
+    //     console.log(state);
+    //     if(state == 'Ready'){
+    //         console.log('i am ready');
+    //     }
 
-        return;
-    });
+    //     return;
+    // });
 
     $board.delegate('.cell.empty', 'click', function(e){
         e.preventDefault();
