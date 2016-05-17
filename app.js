@@ -15,6 +15,7 @@ var cool = require('cool-ascii-faces');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 var uuid = require('node-uuid');
+var Room = require('./room.js');
 
 //MONGO CONNECTION
 var mongodbUri = 'mongodb://heroku_wzd0fsz6:16k5pojt8r5ek7usa5qu672jhs@ds025439.mlab.com:25439/heroku_wzd0fsz6';
@@ -152,18 +153,91 @@ var rooms = {};
 var clients = [];
 
 io.on('connection', function(socket){
-	var addedUser = false;
 	
-	socket.on('create', function(room){
-		socket.join(room);
+	socket.on('createRoom', function(name){
+		if(people[socket.id].room === null){
+			var id = uuid.v4();
+			console.log('uuid generated: ' + id);
+			var room = new Room(name, id, socket.id);
+			rooms[id] = room;
+			//io.sockets.emit('roomList', {rooms: rooms}); //update the list of rooms on the frontend
+		    socket.room = name; //name the room
+		    socket.join(socket.room); //auto-join the creator to the room
+		    room.addPerson(socket.id); //also add the person to the room object
+		    people[socket.id].room = id; //update the room key with the ID of the created room
+
+		}else{
+			console.log('you have already created a room');
+			// socket.sockets.emit("update", "You have already created a room.");
+		}
 	});
 
-	socket.on('startGame', function(){
-		socket.emit()
+	socket.on('joinRoom', function(id){
+		var room = rooms[id];
+		if(socket.id === room.owner){
+			// socket.emit('update', "you are already the owner");
+		}
+		else{
+			room.people.contains(socket.id, function(found){
+				if(found){
+					// socket.emit('update', "you have already joined");
+					console.log('you have already joined');
+				}
+				else{
+					if (people[socket.id].inroom !== null) { //make sure that one person joins one room at a time
+              			// socket.emit("update", "You are already in a room ("+rooms[people[socket.id].inroom].name+"), please leave it first to join another room.");
+   					}
+   					else{
+   						room.addPerson(socket.id);
+   						people[socket.id].inroom = id;
+   						socket.room = room.name;
+   						socket.join(socket.room);
+   						var user = people[socket.id];
+   						// io.sockets.in(socket.room).emit('update', user.name + " has connected to " + room.name + " room.");
+			        	// socket.emit('update', "Welcome to " + room.name + ".");
+			        	// socket.emit("sendRoomID", {id: id});
+      
+   					}
+				}
+			});
+		}
+	});
+	socket.on('leaveRoom', function(id){
+		var room = rooms[id];
+		if(socket.id===room.owner){
+			var i = 0;
+			while(i < clients.length){
+				if(clients[i].id == room.people[i]){
+					people[clients[i].id].inroom = null;
+					clients[i].leave(room.name);
+				}
+				++i;
+			}
+			delete rooms[id];
+			people[room.owner].owns = null;
+			// io.sockets.emit('roomList', {rooms:rooms});
+			// io.sockets.in(socket.room).emit('update', "owner left");
+		} else{
+			room.people.contains(socket.id, function(found){
+				if (found) { //make sure that the client is in fact part of this room
+		          var personIndex = room.people.indexOf(socket.id);
+		          room.people.splice(personIndex, 1);
+		          // io.sockets.emit("update", people[socket.id].name + " has left the room.");
+		          socket.leave(room.name);
+		        }
+			});
+		}
 	});
 
 	socket.on('join',  function(name){
-		// socket.to(id).emit('joinRoom');
+		var roomID = null;
+		people[socket.id] = {"name" : name, "room" : roomID}
+		// socket.emit('update', 'you have connected to the server');
+		// io.sockets.emit('update', people[client.id].name + " is online.")
+	 //    io.sockets.emit('update-people', people);
+	    // socket.emit("roomList", {rooms: rooms});
+	    clients.push(socket); //populate the clients array with the client object
+
 	});
 
 	socket.on('target', function(list){
@@ -191,30 +265,49 @@ io.on('connection', function(socket){
         }
 	});
 
-	socket.on('adduser', function(username){
-		if(addedUser) return;
-
-		//store the username in socket session 
-		socket.username = username;
-		addedUser = true;
-
-		//echo globally (all clients) that a person has connected
-		socket.broadcast.emit('user joined', {
-			username: socket.username
-		});
-	});
-
+	
 	socket.on('disconnect', function(){
-		//numUsers--;
-		// if(addedUser){
-		// 	--numUsers;
-		// 	socket.broadcast.emit('user left', {
-		// 		username: socket.username,
-		// 		numUsers: numUsers
-		// 	});
-		// }
+		if(people[socket.id]{
+			if(people[socket.id].inroom === null){
+				// io.sockets.emit('update', 'someone left');
+				delete people[socket.id];
+				// io.sockets.emit('update-people', people);
+			}else{
+				if(people[socket.id].owns != null){
+					var room = rooms[people[socket.id].owns];
+					if(socket.id === room.owner){
+						var i = 0;
+						while(i < clients.length){
+							if(clients[i].id == room.people[i]){
+								people[clients[i].id].inroom = null;
+								clients[i].leave(room.name);
+							}
+							++i;
+						}
+						delete rooms[people[socket.id].owns];
+					}
+					delete people[socket.id];
+					// io.sockets.emit('update-people', people);
+					// io.sockets.emit('roomList', {rooms: rooms});
+
+				}
+			}
+		})
 	});
 });
+
+Array.prototype.contains = function(k, callback) {  
+    var self = this;
+    return (function check(i) {
+        if (i >= self.length) {
+            return callback(false);
+        }
+        if (self[i] === k) {
+            return callback(true);
+        }
+        return process.nextTick(check.bind(null, i+1));
+    }(0));
+};
 
 //===============================================
 //================START SERVER===================
