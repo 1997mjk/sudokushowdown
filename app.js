@@ -14,6 +14,7 @@ var io = require('socket.io').listen(http);
 var cool = require('cool-ascii-faces');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
+var uuid = require('node-uuid');
 
 //MONGO CONNECTION
 var mongodbUri = 'mongodb://heroku_wzd0fsz6:16k5pojt8r5ek7usa5qu672jhs@ds025439.mlab.com:25439/heroku_wzd0fsz6';
@@ -160,16 +161,10 @@ io.on('connection', function(socket){
 	socket.on('startGame', function(){
 		socket.emit()
 	});
-	console.log(socket.sockets.manager.roomClients[socket.id]); //should return { '': true }  
-	socket.room = 'myroom';  
-	socket.join('myroom');  
-	console.log(socket.sockets.manager.roomClients[socket.id]); //sh
 
-	// socket.on('join',  function(room){
-	// 	//join an existing room
-	// 	socket.to(id).emit('joinRoom');
-
-	// });
+	socket.on('join',  function(name){
+		// socket.to(id).emit('joinRoom');
+	});
 
 	socket.on('target', function(list){
 		var index = list[0];
@@ -177,11 +172,12 @@ io.on('connection', function(socket){
 
 		var solution = "435269781682571493197834562826195347374682915951743628519326874248957136763418259";
         if(solution[index]==numberSubmmitted){ //correct answer
-        	console.log('correct answer received');
+        	console.log('correct answer received from: ' + socket.id);
         	// socket.broadcast.to(id).emit('correct', [index, numberSubmmitted]);
         	// socket.to(id).emit('correct', [index, numberSubmmitted]);
         	socket.broadcast.emit('correct', [index, numberSubmmitted]);
         	socket.emit('correct', [index, numberSubmmitted]);
+
         	
         }
         else if(numberSubmmitted != ''){ //did not enter anythign
