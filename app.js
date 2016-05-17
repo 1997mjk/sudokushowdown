@@ -267,7 +267,7 @@ io.on('connection', function(socket){
 
 	
 	socket.on('disconnect', function(){
-		if(people[socket.id]{
+		if(people[socket.id]){
 			if(people[socket.id].inroom === null){
 				// io.sockets.emit('update', 'someone left');
 				delete people[socket.id];
@@ -286,13 +286,13 @@ io.on('connection', function(socket){
 						}
 						delete rooms[people[socket.id].owns];
 					}
-					delete people[socket.id];
-					// io.sockets.emit('update-people', people);
-					// io.sockets.emit('roomList', {rooms: rooms});
-
 				}
+				delete people[socket.id];
+				// io.sockets.emit('update-people', people);
+				// io.sockets.emit('roomList', {rooms: rooms});
+
 			}
-		})
+		}
 	});
 });
 
