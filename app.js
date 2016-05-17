@@ -160,10 +160,10 @@ io.on('connection', function(socket){
 	socket.on('startGame', function(){
 		socket.emit()
 	});
-	console.log(socket.sockets.manager.roomClients[client.id]); //should return { '': true }  
+	console.log(socket.sockets.manager.roomClients[socket.id]); //should return { '': true }  
 	socket.room = 'myroom';  
 	socket.join('myroom');  
-	console.log(socket.sockets.manager.roomClients[client.id]); //sh
+	console.log(socket.sockets.manager.roomClients[socket.id]); //sh
 
 	// socket.on('join',  function(room){
 	// 	//join an existing room
