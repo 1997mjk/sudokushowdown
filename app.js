@@ -8,23 +8,17 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var passportLocal = require('passport-local');
 var flash = require('connect-flash');
-
-
 var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io').listen(http);
-// var pg = require('pg');
 var cool = require('cool-ascii-faces');
-
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 //MONGO CONNECTION
 var mongodbUri = 'mongodb://heroku_wzd0fsz6:16k5pojt8r5ek7usa5qu672jhs@ds025439.mlab.com:25439/heroku_wzd0fsz6';
-
 mongoose.connect(mongodbUri);
 var db = mongoose.connection;
-
 var userSchema = mongoose.Schema({
 	firstName: String,
 	lastName: String,
@@ -152,19 +146,24 @@ app.post('/signup', function(req,res){
 //===============================================
 //===================SOCKET======================
 //===============================================
+var people = {}; 
+var rooms = {};
+var clients = [];
 
 io.on('connection', function(socket){
 	var addedUser = false;
 	
-	// socket.join('lobby');
+	socket.on('create', function(room){
+		socket.join(room);
+	});
 
-	// socket.on('create', function(username){
-	// 	//create a room and join
-	// 	//call create function to all
-	// 	socket.broadcast.emit('showRoom');
-	// 	//call join for requester
-	// 	socket.to(id).emit('joinRoom');
-	// });
+	socket.on('startGame', function(){
+		socket.emit()
+	});
+	console.log(socket.sockets.manager.roomClients[client.id]); //should return { '': true }  
+	socket.room = 'myroom';  
+	socket.join('myroom');  
+	console.log(socket.sockets.manager.roomClients[client.id]); //sh
 
 	// socket.on('join',  function(room){
 	// 	//join an existing room
