@@ -168,7 +168,7 @@ io.on('connection', function(socket){
 		    socket.join(socket.room); //auto-join the creator to the room
 		    room.addPerson(socket.id); //also add the person to the room object
 		    people[socket.id].room = id; //update the room key with the ID of the created room
-		    people[sokcet.id].colorChoice = colorChoices[0]; 
+		    people[socket.id].colorChoice = colorChoices[0]; 
 
 		}else{
 			console.log('you have already created a room');
