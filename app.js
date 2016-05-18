@@ -161,10 +161,6 @@ io.on('connection', function(socket){
 		if(people[socket.id].room === null){
 			var id = uuid.v4();
 			console.log('uuid generated: ' + id);
-			console.log('uuid generated: ' + id);
-			console.log('uuid generated: ' + id);
-			console.log('uuid generated: ' + id);
-			console.log('uuid generated: ' + id);
 			var room = new Room(name, id, socket.id, 0);
 			rooms[id] = room;
 			// io.sockets.emit('roomList', {rooms: rooms}); //update the list of rooms on the frontend

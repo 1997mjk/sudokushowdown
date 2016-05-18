@@ -1,4 +1,3 @@
-$(function() {
 
 	var socket = io();
 
@@ -8,8 +7,9 @@ $(function() {
 
 	function createRoom(){
 		var randomRoomName = (int)(Math.random()*1000000) +"";
+		alert(randomRoomName);
 		socket.emit('createRoom', randomRoomName);
-		alert(randomRoomName);		
+				
 	}
 
-});
+
