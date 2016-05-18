@@ -169,7 +169,9 @@ io.on('connection', function(socket){
 		    room.addPerson(socket.id); //also add the person to the room object
 		    people[socket.id].room = id; //update the room key with the ID of the created room
 		    people[socket.id].colorChoice = colorChoices[0]; 
+		    people[socket.id].inroom = id;
 		    console.log('color choice is: ' + people[socket.id].colorChoice);
+		    console.log('I am ' + socket.id);
 
 		}else{
 			console.log('you have already created a room');
@@ -254,7 +256,7 @@ io.on('connection', function(socket){
 	socket.on('target', function(list){
 		var index = list[0];
 		var numberSubmitted = list[1];
-		console.log('COLORATION SOCKET: ' + people[socket.id]);
+		console.log('COLORATION SOCKET: ' + people[socket.id] + "from id " + socket.id);
 
 		var coloration = people[socket.id].colorChoice;
 		var solution = "435269781682571493197834562826195347374682915951743628519326874248957136763418259";
