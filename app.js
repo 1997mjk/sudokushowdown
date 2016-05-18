@@ -160,7 +160,6 @@ io.on('connection', function(socket){
 		if(people[socket.id].room === null){
 			var id = uuid.v4();
 			console.log('uuid generated: ' + id);
-			alert('created');
 			var room = new Room(name, id, socket.id, 0);
 			rooms[id] = room;
 			// io.sockets.emit('roomList', {rooms: rooms}); //update the list of rooms on the frontend
@@ -239,8 +238,6 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('join',  function(name){
-		console.log('server joined');
-		console.log('server joined');
 		console.log('server joined');
 		people[socket.id] = {"name" : name, "room" : null, "colorChoice" : null, "owns" : null, "inroom" : null}
 		// socket.emit('update', 'you have connected to the server');

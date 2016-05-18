@@ -3,12 +3,17 @@ $(document).ready(function () {
 	
 	socket.emit('join', 'lobby');
 	//socket.emit('create', room);
+
 	// $button.delegate('#create', 'click', function(){
 	// 	alert('hi');
 	// 	var randomRoomName = parseInt(Math.random()*1000000) +"";
 	// 	socket.emit('createRoom', randomRoomName);	
 	// });
-
+    $("#createRoom").click( function()
+       console.log('button pressed');
+       	var randomRoomName = parseInt(Math.random()*1000000) +"";
+		socket.emit('createRoom', randomRoomName);	
+    );
 
 
 
