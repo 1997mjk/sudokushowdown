@@ -11,6 +11,7 @@ $(document).ready(function () {
 	// });
     $("#createRoom").click( function(){
        	var randomRoomName = parseInt(Math.random()*1000000) +"";
+       	console.log(user);
 		socket.emit('createRoom', randomRoomName);
     });
 
