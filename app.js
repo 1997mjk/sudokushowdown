@@ -169,6 +169,7 @@ io.on('connection', function(socket){
 		    room.addPerson(socket.id); //also add the person to the room object
 		    people[socket.id].room = id; //update the room key with the ID of the created room
 		    people[socket.id].colorChoice = colorChoices[0]; 
+		    console.log('color choice is: ' + people[socket.id].colorChoice);
 
 		}else{
 			console.log('you have already created a room');
