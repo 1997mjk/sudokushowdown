@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	var socket = io ();
+	var socket = io();
 	socket.emit('join', 'lobby');
 	//socket.emit('create', room);
 	function createRoom(){
