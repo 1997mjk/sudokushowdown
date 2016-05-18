@@ -156,6 +156,8 @@ var colorChoices = ['#FF0000', '#FF7F00', '#0000FF', '#4B0082', '#008000'];
 //red, orange, blue, purple, dark green
 
 io.on('connection', function(socket){
+	console.log('socket when connecting: ' + socket.id);
+	
 	socket.on('createRoom', function(name){
 		if(people[socket.id].room === null){
 			var id = uuid.v4();
@@ -171,7 +173,7 @@ io.on('connection', function(socket){
 		    people[socket.id].colorChoice = colorChoices[0]; 
 		    people[socket.id].inroom = id;
 		    console.log('color choice is: ' + people[socket.id].colorChoice);
-		    console.log('I am ' + socket.id);
+		    console.log('Socket when creating room ' + socket.id);
 
 		}else{
 			console.log('you have already created a room');
@@ -244,6 +246,7 @@ io.on('connection', function(socket){
 		console.log('server joined');
 		console.log('server joined');
 		console.log('server joined');
+		console.log('Socket when joining: ' + socket.id);
 		people[socket.id] = {"name" : name, "room" : null, "colorChoice" : null, "owns" : null, "inroom" : null}
 		// socket.emit('update', 'you have connected to the server');
 		// io.sockets.emit('update', people[client.id].name + " is online.")
