@@ -1,4 +1,4 @@
-$(function(){
+$(document).ready(function () {
 	var socket = io ();
 	socket.emit('join', 'lobby');
 	//socket.emit('create', room);
@@ -8,4 +8,6 @@ $(function(){
 		socket.emit('createRoom', randomRoomName);		
 	}
 
+
 });
+
