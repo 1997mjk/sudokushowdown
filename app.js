@@ -242,7 +242,6 @@ io.on('connection', function(socket){
 		console.log('server joined');
 		console.log('server joined');
 		console.log('server joined');
-		console.log('server joined');
 		people[socket.id] = {"name" : name, "room" : null, "colorChoice" : null, "owns" : null, "inroom" : null}
 		// socket.emit('update', 'you have connected to the server');
 		// io.sockets.emit('update', people[client.id].name + " is online.")
