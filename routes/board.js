@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/board', ensureAuthenticated, function(req, res){
+	console.log('router got board call');
 	res.render('guestBoard', { //guestBoard.ejs
 		title: 'Game Board',
 		isAuthenticated: req.isAuthenticated(),

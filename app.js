@@ -266,13 +266,14 @@ io.on('connection', function(socket){
 
         	
         }
-        else if(numberSubmitted != ''){ //did not enter anythign
+        else if(numberSubmitted != ''){ //wrong number entered
+        	console.log(people[socket.id].colorChoice);
         	var coloration = people[socket.id].colorChoice;
         	// socket.broadcast.emit('incorrect', [index, numberSubmitted], coloration);
         	// socket.emit('incorrect', [index, numberSubmitted], coloration);
         	io.sockets.in(socket.room).emit('incorrect', [index, numberSubmitted], coloration);
         }
-        else{ //wrong number submitted
+        else{ //nothing entered
         	// socket.broadcast.emit('empty', [index, numberSubmitted]);
         	// socket.emit('empty', [index, numberSubmitted]);
         	io.sockets.in(socket.room).emit('empty', [index, numberSubmitted]);
