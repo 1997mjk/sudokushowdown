@@ -9,11 +9,10 @@ $(document).ready(function () {
 	// 	var randomRoomName = parseInt(Math.random()*1000000) +"";
 	// 	socket.emit('createRoom', randomRoomName);	
 	// });
-    $("#createRoom").click( function()
-       console.log('button pressed');
+    $("#createRoom").click( function(){
        	var randomRoomName = parseInt(Math.random()*1000000) +"";
-		socket.emit('createRoom', randomRoomName);	
-    );
+		socket.emit('createRoom', randomRoomName);
+    });
 
 
 
