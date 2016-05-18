@@ -6,9 +6,10 @@ $(document).ready(function () {
 	function loadUser(){
 		var name = documenet.getElementById('username');
 		alert(name);
+		console.log('joining lobby');
 		socket.emit('join', 'lobby');
 	}
-	loadUser();
+	
 	//socket.emit('create', room);
 
 	// $button.delegate('#create', 'click', function(){
@@ -23,7 +24,7 @@ $(document).ready(function () {
 		window.location.href='/board';
     });
 
-
+	loadUser();
 
 });
 
