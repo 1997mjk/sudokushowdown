@@ -161,9 +161,14 @@ io.on('connection', function(socket){
 		if(people[socket.id].room === null){
 			var id = uuid.v4();
 			console.log('uuid generated: ' + id);
+			console.log('uuid generated: ' + id);
+			console.log('uuid generated: ' + id);
+			console.log('uuid generated: ' + id);
+			console.log('uuid generated: ' + id);
 			var room = new Room(name, id, socket.id, 0);
 			rooms[id] = room;
 			// io.sockets.emit('roomList', {rooms: rooms}); //update the list of rooms on the frontend
+
 		    socket.room = name; //name the room
 		    socket.join(socket.room); //auto-join the creator to the room
 		    room.addPerson(socket.id); //also add the person to the room object
