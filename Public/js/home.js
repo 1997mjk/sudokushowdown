@@ -1,11 +1,9 @@
 $(document).ready(function () {
 	var socket = io();
 	
-	function loadUser(){
-		alert('username: ' + user + " and win is: " + win);
-		socket.emit('join', 'lobby');
-	}
-	loadUser();
+	
+	alert('username: ' + user + " and win is: " + win);
+	socket.emit('join', 'lobby');
 	//socket.emit('create', room);
 
 	// $button.delegate('#create', 'click', function(){
