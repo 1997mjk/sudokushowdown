@@ -1,5 +1,6 @@
 var socket = io();
 
-var room = (int)(Math.random()*1000000);
-socket.emit('join', 'temp');
+var randomRoom = (int)(Math.random()*1000000);
+socket.emit('join', 'lobby');
 //socket.emit('create', room);
+

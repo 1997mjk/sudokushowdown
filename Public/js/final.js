@@ -182,6 +182,7 @@ $(function() {
         var number    = $cell.find('input').val();
         socket.emit('target', [index,number]);
         $selected = $([]);
+        //var roomID = $(this).attr("id");
         
     }
     socket.on('incorrect', function(answerList, coloration){

@@ -152,19 +152,23 @@ var people = {};
 var rooms = {};
 var clients = [];
 
+var colorChoices = ['#FF0000', '#FF7F00', '#0000FF', '#4B0082', '#008000'];
+//red, orange, blue, purple, dark green
+
 io.on('connection', function(socket){
 	
 	socket.on('createRoom', function(name){
 		if(people[socket.id].room === null){
 			var id = uuid.v4();
 			console.log('uuid generated: ' + id);
-			var room = new Room(name, id, socket.id);
+			var room = new Room(name, id, socket.id, 0);
 			rooms[id] = room;
-			//io.sockets.emit('roomList', {rooms: rooms}); //update the list of rooms on the frontend
+			io.sockets.emit('roomList', {rooms: rooms}); //update the list of rooms on the frontend
 		    socket.room = name; //name the room
 		    socket.join(socket.room); //auto-join the creator to the room
 		    room.addPerson(socket.id); //also add the person to the room object
 		    people[socket.id].room = id; //update the room key with the ID of the created room
+		    people[sokcet.id].colorChoice = colorChoices[0]; 
 
 		}else{
 			console.log('you have already created a room');
@@ -190,6 +194,8 @@ io.on('connection', function(socket){
    					else{
    						room.addPerson(socket.id);
    						people[socket.id].inroom = id;
+   						room.number = (room.number + 1); //update number of people in room
+   						people[socket.id].colorChoice = colorChoices[room.number];
    						socket.room = room.name;
    						socket.join(socket.room);
    						var user = people[socket.id];
@@ -202,6 +208,7 @@ io.on('connection', function(socket){
 			});
 		}
 	});
+
 	socket.on('leaveRoom', function(id){
 		var room = rooms[id];
 		if(socket.id===room.owner){
@@ -215,13 +222,14 @@ io.on('connection', function(socket){
 			}
 			delete rooms[id];
 			people[room.owner].owns = null;
-			// io.sockets.emit('roomList', {rooms:rooms});
+			io.sockets.emit('roomList', {rooms:rooms});
 			// io.sockets.in(socket.room).emit('update', "owner left");
 		} else{
 			room.people.contains(socket.id, function(found){
 				if (found) { //make sure that the client is in fact part of this room
 		          var personIndex = room.people.indexOf(socket.id);
 		          room.people.splice(personIndex, 1);
+		          room.number = (room.number - 1);
 		          // io.sockets.emit("update", people[socket.id].name + " has left the room.");
 		          socket.leave(room.name);
 		        }
@@ -231,37 +239,41 @@ io.on('connection', function(socket){
 
 	socket.on('join',  function(name){
 		var roomID = null;
-		people[socket.id] = {"name" : name, "room" : roomID}
+		var colorC = null;
+		people[socket.id] = {"name" : name, "room" : roomID, "colorChoice" : colorC, "owns" : null, "inroom" : null}
 		// socket.emit('update', 'you have connected to the server');
 		// io.sockets.emit('update', people[client.id].name + " is online.")
 	 //    io.sockets.emit('update-people', people);
-	    // socket.emit("roomList", {rooms: rooms});
+	    socket.emit('roomList', {rooms: rooms});
 	    clients.push(socket); //populate the clients array with the client object
 
 	});
 
 	socket.on('target', function(list){
 		var index = list[0];
-		var numberSubmmitted = list[1];
+		var numberSubmitted = list[1];
 
 		var solution = "435269781682571493197834562826195347374682915951743628519326874248957136763418259";
-        if(solution[index]==numberSubmmitted){ //correct answer
+        if(solution[index]==numberSubmitted){ //correct answer
         	console.log('correct answer received from: ' + socket.id);
-        	// socket.broadcast.to(id).emit('correct', [index, numberSubmmitted]);
-        	// socket.to(id).emit('correct', [index, numberSubmmitted]);
-        	socket.broadcast.emit('correct', [index, numberSubmmitted]);
-        	socket.emit('correct', [index, numberSubmmitted]);
+        	// socket.broadcast.to(id).emit('correct', [index, numberSubmitted]);
+        	// socket.to(id).emit('correct', [index, numberSubmitted]);
+        	// socket.broadcast.emit('correct', [index, numberSubmitted]);
+        	// socket.emit('correct', [index, numberSubmitted]);
+        	io.sockets.in(socket.room).emit('correct', [index, numberSubmitted]);
 
         	
         }
-        else if(numberSubmmitted != ''){ //did not enter anythign
-        	var coloration = "#FFFF88";
-        	socket.broadcast.emit('incorrect', [index, numberSubmmitted], coloration);
-        	socket.emit('incorrect', [index, numberSubmmitted], coloration);
+        else if(numberSubmitted != ''){ //did not enter anythign
+        	var coloration = people[socket.id].colorChoice;
+        	// socket.broadcast.emit('incorrect', [index, numberSubmitted], coloration);
+        	// socket.emit('incorrect', [index, numberSubmitted], coloration);
+        	io.sockets.in(socket.room).emit('incorrect', [index, numberSubmitted], coloration);
         }
         else{ //wrong number submitted
-        	socket.broadcast.emit('empty', [index, numberSubmmitted]);
-        	socket.emit('empty', [index, numberSubmmitted]);
+        	// socket.broadcast.emit('empty', [index, numberSubmitted]);
+        	// socket.emit('empty', [index, numberSubmitted]);
+        	io.sockets.in(socket.room).emit('empty', [index, numberSubmitted]);
         }
 	});
 
@@ -289,7 +301,7 @@ io.on('connection', function(socket){
 				}
 				delete people[socket.id];
 				// io.sockets.emit('update-people', people);
-				// io.sockets.emit('roomList', {rooms: rooms});
+				io.sockets.emit('roomList', {rooms: rooms});
 
 			}
 		}
