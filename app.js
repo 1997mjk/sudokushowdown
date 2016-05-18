@@ -254,8 +254,8 @@ io.on('connection', function(socket){
 	socket.on('target', function(list){
 		var index = list[0];
 		var numberSubmitted = list[1];
-		console.log('COLORATION SOCKET: ' + people[socket.id].colorChoice);
-		
+		console.log('COLORATION SOCKET: ' + people[socket.id]);
+
 		var coloration = people[socket.id].colorChoice;
 		var solution = "435269781682571493197834562826195347374682915951743628519326874248957136763418259";
         if(solution[index]==numberSubmitted){ //correct answer
@@ -269,11 +269,11 @@ io.on('connection', function(socket){
         	
         }
         else if(numberSubmitted != ''){ //wrong number entered
-        	console.log(people[socket.id].colorChoice);
-        	var coloration = people[socket.id].colorChoice;
+        	// console.log(people[socket.id]);
+        	// var coloration = people[socket.id].colorChoice;
         	// socket.broadcast.emit('incorrect', [index, numberSubmitted], coloration);
         	// socket.emit('incorrect', [index, numberSubmitted], coloration);
-        	io.sockets.in(socket.room).emit('incorrect', [index, numberSubmitted], coloration);
+        	io.sockets.in(socket.room).emit('incorrect', [index, numberSubmitted], '#FF00000');
         }
         else{ //nothing entered
         	// socket.broadcast.emit('empty', [index, numberSubmitted]);
