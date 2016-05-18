@@ -6,7 +6,7 @@
 	//socket.emit('create', room);
 
 	function createRoom(){
-		var randomRoomName = (int)(Math.random()*1000000) +"";
+		var randomRoomName = parseInt(Math.random()*1000000)) +"";
 		alert(randomRoomName);
 		socket.emit('createRoom', randomRoomName);
 				
