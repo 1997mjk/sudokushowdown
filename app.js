@@ -156,7 +156,6 @@ var colorChoices = ['#FF0000', '#FF7F00', '#0000FF', '#4B0082', '#008000'];
 //red, orange, blue, purple, dark green
 
 io.on('connection', function(socket){
-	
 	socket.on('createRoom', function(name){
 		if(people[socket.id].room === null){
 			var id = uuid.v4();
