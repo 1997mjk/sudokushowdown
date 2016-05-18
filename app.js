@@ -255,12 +255,12 @@ io.on('connection', function(socket){
 
 		var solution = "435269781682571493197834562826195347374682915951743628519326874248957136763418259";
         if(solution[index]==numberSubmitted){ //correct answer
-        	console.log('correct answer received from: ' + socket.id);
-        	// socket.broadcast.to(id).emit('correct', [index, numberSubmitted]);
-        	// socket.to(id).emit('correct', [index, numberSubmitted]);
+        	console.log('correct answer received from: ' + socket.id + "at " + socket.room);
+        	socket.broadcast.to(socket.room).emit('correct', [index, numberSubmitted]);
+        	socket.to(socket.room).emit('correct', [index, numberSubmitted]);
         	// socket.broadcast.emit('correct', [index, numberSubmitted]);
         	// socket.emit('correct', [index, numberSubmitted]);
-        	io.sockets.in(socket.room).emit('correct', [index, numberSubmitted]);
+        	// io.sockets.in(socket.room).emit('correct', [index, numberSubmitted]);
 
         	
         }
