@@ -254,7 +254,9 @@ io.on('connection', function(socket){
 	socket.on('target', function(list){
 		var index = list[0];
 		var numberSubmitted = list[1];
-
+		console.log('COLORATION SOCKET: ' + people[socket.id].colorChoice);
+		
+		var coloration = people[socket.id].colorChoice;
 		var solution = "435269781682571493197834562826195347374682915951743628519326874248957136763418259";
         if(solution[index]==numberSubmitted){ //correct answer
         	console.log('correct answer received from: ' + socket.id + "at " + socket.room);
