@@ -163,7 +163,7 @@ io.on('connection', function(socket){
 			console.log('uuid generated: ' + id);
 			var room = new Room(name, id, socket.id, 0);
 			rooms[id] = room;
-			io.sockets.emit('roomList', {rooms: rooms}); //update the list of rooms on the frontend
+			// io.sockets.emit('roomList', {rooms: rooms}); //update the list of rooms on the frontend
 		    socket.room = name; //name the room
 		    socket.join(socket.room); //auto-join the creator to the room
 		    room.addPerson(socket.id); //also add the person to the room object
@@ -222,7 +222,7 @@ io.on('connection', function(socket){
 			}
 			delete rooms[id];
 			people[room.owner].owns = null;
-			io.sockets.emit('roomList', {rooms:rooms});
+			// io.sockets.emit('roomList', {rooms:rooms});
 			// io.sockets.in(socket.room).emit('update', "owner left");
 		} else{
 			room.people.contains(socket.id, function(found){
@@ -244,7 +244,7 @@ io.on('connection', function(socket){
 		// socket.emit('update', 'you have connected to the server');
 		// io.sockets.emit('update', people[client.id].name + " is online.")
 	 //    io.sockets.emit('update-people', people);
-	    socket.emit('roomList', {rooms: rooms});
+	    // socket.emit('roomList', {rooms: rooms});
 	    clients.push(socket); //populate the clients array with the client object
 
 	});

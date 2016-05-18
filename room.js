@@ -1,9 +1,10 @@
-function Room(name, id, owner) {  
+function Room(name, id, owner, number) {  
   this.name = name;
   this.id = id;
   this.owner = owner;
   this.people = [];
   this.status = "available";
+  this.number = number;
 };
 
 Room.prototype.addPerson = function(personID) {  
