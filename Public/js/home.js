@@ -3,7 +3,12 @@ $(document).ready(function () {
 	
 	
 	//alert('username: ' + user + " and win is: " + win);
-	socket.emit('join', 'lobby');
+	function loadUser(){
+		var name = documenet.getElementById('username');
+		alert(name);
+		socket.emit('join', 'lobby');
+	}
+	loadUser();
 	//socket.emit('create', room);
 
 	// $button.delegate('#create', 'click', function(){
