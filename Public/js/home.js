@@ -2,7 +2,7 @@ $(document).ready(function () {
 	var socket = io();
 	
 	
-	alert('username: ' + user + " and win is: " + win);
+	//alert('username: ' + user + " and win is: " + win);
 	socket.emit('join', 'lobby');
 	//socket.emit('create', room);
 
