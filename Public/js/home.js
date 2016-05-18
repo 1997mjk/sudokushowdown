@@ -1,14 +1,8 @@
 $(document).ready(function () {
 	var socket = io();
 	
-	
-	//alert('username: ' + user + " and win is: " + win);
-	function loadUser(){
-		var name = documenet.getElementById('username');
-		alert(name);
-		console.log('joining lobby');
-		socket.emit('join', 'lobby');
-	}
+	socket.emit('join', 'lobby');
+
 	
 	//socket.emit('create', room);
 
@@ -19,12 +13,12 @@ $(document).ready(function () {
 	// });
     $("#createRoom").click( function(){
        	var randomRoomName = parseInt(Math.random()*1000000) +"";
-       	alert('random room created');
+       	var name = documenet.getElementById('username');
+       	alert('random room created: ' + name);
 		socket.emit('createRoom', randomRoomName);
 		window.location.href='/board';
     });
 
-	loadUser();
 
 });
 
