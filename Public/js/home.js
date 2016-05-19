@@ -18,6 +18,7 @@ $(document).ready(function () {
     });
 
     socket.on('updateRooms', function(){
+    	console.log('updating rooms');
     	var roomDiv = "<li><div class='panel panel-primary'><div class='panel-heading'><div class='row'><div class='col-xs-4'><i class='fa fa-users fa-5x'></i></div><div class='col-xs-4 text-center'><div class='huge'>"+ $(boardDimension).val() +"</div></div><div class='col-xs-4 text-right'><div class='huge'>1/"+ $(playerNumber).val() +"</div><div>Creator: JohnCena</div></div></div></div><a href='#''><div class='panel-footer'><span class='pull-left'>Join Game!</span><span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span><div class='clearfix'></div></div></a></div></li>";
     	// var roomDiv = "<div>MumeiLover404</div>";
     	$(roomDiv).hide().appendTo("#activeRoomsTimeline").fadeIn(1000);

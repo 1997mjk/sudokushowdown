@@ -170,8 +170,6 @@ io.on('connection', function(socket){
 		    people[socket.id].room = id; //update the room key with the ID of the created room
 		    people[socket.id].colorChoice = colorChoices[0]; 
 		    people[socket.id].inroom = id;
-		    console.log('color choice is: ' + people[socket.id].colorChoice);
-		    console.log('Socket when creating room ' + socket.id + ' joining room: ' + socket.room);
 
 		}else{
 			console.log('you have already created a room');
@@ -179,6 +177,7 @@ io.on('connection', function(socket){
 		}
 	});
 	socket.on('roomCreation', function(){
+		console.log('room created');
 		io.sockets.emit('updateRooms');
 
 	});
