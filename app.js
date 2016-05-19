@@ -162,7 +162,7 @@ io.on('connection', function(socket){
 			console.log('uuid generated: ' + id);
 			var room = new Room(name, id, socket.id, 0);
 			rooms[id] = room;
-			io.sockets.emit('roomList', name); //update the list of rooms on the frontend
+			//io.sockets.emit('roomList', name); //update the list of rooms on the frontend
 		    socket.room = name; //name the room
 		    socket.join(socket.room); //auto-join the creator to the room
 		    room.addPerson(socket.id); //also add the person to the room object
@@ -175,13 +175,7 @@ io.on('connection', function(socket){
 			// socket.sockets.emit("update", "You have already created a room.");
 		}
 	});
-	socket.on('roomCreation', function(){
-		console.log('room created');
-		socket.emit('firstPerson');
-
-	});
-
-
+	
 	socket.on('joinRoom', function(id){
 		var room = rooms[id];
 		if(socket.id === room.owner){

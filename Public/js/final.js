@@ -224,15 +224,10 @@ $(function() {
     function waitForPlayers(){
         console.log('waiting for Players');
         socket.emit('join', 'lobby');
-
-        
-
-        initializeBoard(); //FOR NOW
-    };
-    socket.on('firstPerson', function(stuff){
         var randomRoomName = parseInt(Math.random()*1000000) +"";
         socket.emit('createRoom', randomRoomName);
-    });
+        initializeBoard(); //FOR NOW
+    };
 
     waitForPlayers();
 

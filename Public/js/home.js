@@ -11,7 +11,7 @@ $(document).ready(function () {
 	// 	socket.emit('createRoom', randomRoomName);	
 	// });
     $("#createRoom").click( function(){
-    	socket.emit('roomCreation');
+    	
     	window.location.href='/board';
     });
 
