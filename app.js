@@ -185,8 +185,8 @@ io.on('connection', function(socket){
 			// socket.sockets.emit("update", "You have already created a room.");
 		}
 	});
-	socket.on('update', function(){
-		socket.emit('roomList', 11111);
+	socket.on('updateRooms', function(){
+		io.sockets.in('main').emit('roomList', 11111);
 	});
 
 	socket.on('joinRoom', function(id){
