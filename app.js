@@ -180,13 +180,7 @@ io.on('connection', function(socket){
 		socket.emit('firstPerson');
 
 	});
-	socket.on('enterLobby', function(){
-		socket.join('main');
-	});
 
-	socket.on('roomJoin', function(){
-
-	});
 
 	socket.on('joinRoom', function(id){
 		var room = rooms[id];
