@@ -151,14 +151,17 @@ app.post('/signup', function(req,res){
 var people = {}; 
 var rooms = {};
 var clients = [];
+var fuck = 0
 
 var colorChoices = ['#FF0000', '#FF7F00', '#0000FF', '#4B0082', '#008000'];
 //red, orange, blue, purple, dark green
 
 io.on('connection', function(socket){
 	socket.on('createRoom', function(name){
-		if(people[socket.id].room === null){
-			var id = uuid.v4();
+		// if(people[socket.id].room === null){
+		if(fuck == 0){
+			// var id = uuid.v4();
+			var id = 11111;
 			console.log('uuid generated: ' + id);
 			var room = new Room(name, id, socket.id, 0);
 			rooms[id] = room;
@@ -169,13 +172,20 @@ io.on('connection', function(socket){
 		    people[socket.id].room = id; //update the room key with the ID of the created room
 		    people[socket.id].colorChoice = colorChoices[0]; 
 		    people[socket.id].inroom = id;
+		    fuck = 1
 
 		}else{
 			console.log('you have already created a room');
+			room.addPerson(socket.id);
+   						people[socket.id].inroom = id;
+   						room.number = (room.number + 1); //update number of people in room
+   						people[socket.id].colorChoice = colorChoices[room.number];
+   						socket.room = room.name;
+   						socket.join(socket.room);
 			// socket.sockets.emit("update", "You have already created a room.");
 		}
 	});
-	
+
 	socket.on('joinRoom', function(id){
 		var room = rooms[id];
 		if(socket.id === room.owner){
