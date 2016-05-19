@@ -17,8 +17,6 @@ $(document).ready(function () {
 
     $("#joinGame").click( function(){
     	//socket.emit('roomJoin'); //add +1 to shit and giggles
-
-    	socket.emit('roomJoin', );
     	window.location.href ='/board';
     });
 
