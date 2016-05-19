@@ -193,8 +193,8 @@ io.on('connection', function(socket){
 		io.sockets.in(11111).emit('initialize')
 	});
 
-	socket.on('updateRooms', function(){
-		io.sockets.emit('roomList', 11111);
+	socket.on('updateRooms', function(playerNumber){
+		io.sockets.emit('roomList', playerNumber);
 	});
 
 	socket.on('joinRoom', function(id){
