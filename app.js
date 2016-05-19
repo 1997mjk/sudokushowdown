@@ -172,16 +172,19 @@ io.on('connection', function(socket){
 		    people[socket.id].room = id; //update the room key with the ID of the created room
 		    people[socket.id].colorChoice = colorChoices[0]; 
 		    people[socket.id].inroom = id;
-		    fuck = 1
+		    fuck = fuck + 1;
+		    console.log('Creator joiend room: ' + socket.room);
 
 		}else{
 			console.log('you have already created a room');
+			var room = rooms[11111];
 			room.addPerson(socket.id);
-   						people[socket.id].inroom = id;
+   						people[socket.id].inroom = 11111;
    						room.number = (room.number + 1); //update number of people in room
    						people[socket.id].colorChoice = colorChoices[room.number];
    						socket.room = room.name;
    						socket.join(socket.room);
+   						console.log('Joiner joiend room: ' + socket.room);
 			// socket.sockets.emit("update", "You have already created a room.");
 		}
 	});
