@@ -178,8 +178,11 @@ io.on('connection', function(socket){
 	});
 	socket.on('roomCreation', function(){
 		console.log('room created');
-		io.sockets.emit('updateRooms');
+		io.sockets.in('main').emit('updateRooms');
 
+	});
+	socket.on('enterLobby', function(){
+		socket.join('main');
 	});
 
 	socket.on('joinRoom', function(id){
