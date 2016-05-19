@@ -205,7 +205,8 @@ $(function() {
 
     socket.on('empty', function(answerList){
         $cell = $boardCells.eq(answerList[0]);
-        $cell.text('').addClass('empty');        
+        $cell.text('').addClass('empty');   
+        //hi     
     });
 
 
