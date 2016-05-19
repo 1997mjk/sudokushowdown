@@ -142,7 +142,6 @@ app.post('/signup', function(req,res){
 		}
 
 	});
-	console.log('NotLikeThis');
 });
 
 //===============================================
