@@ -265,8 +265,6 @@ io.on('connection', function(socket){
         	// socket.broadcast.emit('correct', [index, numberSubmitted]);
         	// socket.emit('correct', [index, numberSubmitted]);
         	// io.sockets.in(socket.room).emit('correct', [index, numberSubmitted]);
-
-        	
         }
         else if(numberSubmitted != ''){ //wrong number entered
         	// console.log(people[socket.id]);

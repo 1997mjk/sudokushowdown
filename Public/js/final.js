@@ -14,6 +14,7 @@ $(function() {
     var socket = io();
 
 
+
     $(document.body).bind('click', function() {
         if ($selected.length > 0) {
             closeCellInput($selected);
@@ -220,8 +221,13 @@ $(function() {
     }
 
     function waitForPlayers(){
+        console.log('waiting for Players');
+        socket.emit('join', 'lobby');
+        var randomRoomName = parseInt(Math.random()*1000000) +"";
+        socket.emit('createRoom', randomRoomName);
         initializeBoard(); //FOR NOW
     };
+
     waitForPlayers();
 
     // socket.on('startGame', function(){
