@@ -236,8 +236,8 @@ $(function() {
 
     socket.on('initialize', function(){
         initializeBoard();
-        $('#readyButton').css('visibility', false);
-        $('#startButton').css('visibility', false);
+        $('#readyButton').css('display', 'none');
+        $('#startButton').css('display', 'none');
     });
 });
 
