@@ -188,6 +188,11 @@ io.on('connection', function(socket){
 			// socket.sockets.emit("update", "You have already created a room.");
 		}
 	});
+
+	socket.on('startGame', function(){
+		io.sockets.in(11111).emit('initialize')
+	});
+
 	socket.on('updateRooms', function(){
 		io.sockets.emit('roomList', 11111);
 	});

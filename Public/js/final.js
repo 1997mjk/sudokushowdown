@@ -234,7 +234,7 @@ $(function() {
 
     waitForPlayers();
 
-    socket.on('startGame', function(){
+    socket.on('initialize', function(){
         initializeBoard();
     });
 });
