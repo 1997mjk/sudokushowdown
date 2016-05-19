@@ -171,7 +171,7 @@ io.on('connection', function(socket){
 		    people[socket.id].colorChoice = colorChoices[0]; 
 		    people[socket.id].inroom = id;
 		    console.log('color choice is: ' + people[socket.id].colorChoice);
-		    console.log('Socket when creating room ' + socket.id);
+		    console.log('Socket when creating room ' + socket.id + ' joining room: ' + socket.room);
 
 		}else{
 			console.log('you have already created a room');
