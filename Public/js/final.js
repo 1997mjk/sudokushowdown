@@ -41,7 +41,10 @@ $(function() {
 
         console.log(state);
         if(state == 'Ready'){
-            console.log('i am ready');
+            $this.css('background-color', 'green');
+        }
+        if(state == 'Start'){
+            socket.emit('startGame');
         }
 
         return;
@@ -225,15 +228,15 @@ $(function() {
         console.log('waiting for Players');
         socket.emit('join', 'lobby');
         var randomRoomName = parseInt(Math.random()*1000000) +"";
-        socket.emit('createRoom', randomRoomName);
-        initializeBoard(); //FOR NOW
+        socket.emit('createRoom', 11111);
+
     };
 
     waitForPlayers();
 
-    // socket.on('startGame', function(){
-    //     initializeBoard();
-    // });
+    socket.on('startGame', function(){
+        initializeBoard();
+    });
 });
 
 //When users join, all will be assigned to room0 (which will denote the lobby)
