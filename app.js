@@ -255,23 +255,22 @@ io.on('connection', function(socket){
 		var index = list[0];
 		var numberSubmitted = list[1];
 		console.log('COLORATION SOCKET: ' + people[socket.id] + "from id " + socket.id);
-
 		var coloration = people[socket.id].colorChoice;
 		var solution = "435269781682571493197834562826195347374682915951743628519326874248957136763418259";
         if(solution[index]==numberSubmitted){ //correct answer
         	console.log('correct answer received from: ' + socket.id + "at " + socket.room);
-        	socket.broadcast.to(socket.room).emit('correct', [index, numberSubmitted]);
-        	socket.to(socket.room).emit('correct', [index, numberSubmitted]);
+        	//socket.broadcast.to(socket.room).emit('correct', [index, numberSubmitted]);
+        	//socket.to(socket.room).emit('correct', [index, numberSubmitted]);
         	// socket.broadcast.emit('correct', [index, numberSubmitted]);
         	// socket.emit('correct', [index, numberSubmitted]);
-        	// io.sockets.in(socket.room).emit('correct', [index, numberSubmitted]);
+        	io.sockets.in(socket.room).emit('correct', [index, numberSubmitted]);
         }
         else if(numberSubmitted != ''){ //wrong number entered
         	// console.log(people[socket.id]);
         	// var coloration = people[socket.id].colorChoice;
         	// socket.broadcast.emit('incorrect', [index, numberSubmitted], coloration);
         	// socket.emit('incorrect', [index, numberSubmitted], coloration);
-        	io.sockets.in(socket.room).emit('incorrect', [index, numberSubmitted], '#FF00000');
+        	io.sockets.in(socket.room).emit('incorrect', [index, numberSubmitted], coloration);
         }
         else{ //nothing entered
         	// socket.broadcast.emit('empty', [index, numberSubmitted]);
