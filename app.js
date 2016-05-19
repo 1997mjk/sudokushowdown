@@ -263,7 +263,7 @@ io.on('connection', function(socket){
         	//socket.to(socket.room).emit('correct', [index, numberSubmitted]);
         	// socket.broadcast.emit('correct', [index, numberSubmitted]);
         	// socket.emit('correct', [index, numberSubmitted]);
-        	io.sockets.in(socket.room).emit('correct', [index, numberSubmitted]);
+        	io.sockets.in(socket.room).emit('correct', [index, numberSubmitted], coloration);
         }
         else if(numberSubmitted != ''){ //wrong number entered
         	// console.log(people[socket.id]);

@@ -191,11 +191,12 @@ $(function() {
         animator.addSubject(animation).play();
     });
 
-    socket.on('correct', function(answerList){
+    socket.on('correct', function(answerList, coloration){
         //a specific user should get bonuses, but for now everyone gets it
         $cell = $boardCells.eq(answerList[0]);
         $cell.empty().removeClass('empty').removeClass('solved').attr('style', null);
         $cell.text(answerList[1]).addClass('solved');
+        $cell.css('background-color', coloration);
         //$selected = $([]); //user specific?
     });
 
