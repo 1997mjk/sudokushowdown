@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	var socket = io();
-	
+	// socket.join('main');
 	// socket.emit('join', 'lobby');
 	
 	//socket.emit('create', room);
@@ -11,7 +11,7 @@ $(document).ready(function () {
 	// 	socket.emit('createRoom', randomRoomName);	
 	// });
     $("#createRoom").click( function(){
-    	
+    	socket.emit('update');
     	window.location.href='/board';
     });
 
