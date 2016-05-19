@@ -186,7 +186,7 @@ io.on('connection', function(socket){
 		}
 	});
 	socket.on('updateRooms', function(){
-		io.sockets.in('main').emit('roomList', 11111);
+		io.sockets.emit('roomList', 11111);
 	});
 
 	socket.on('joinRoom', function(id){

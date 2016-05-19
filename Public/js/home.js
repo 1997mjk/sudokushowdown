@@ -1,6 +1,5 @@
 $(document).ready(function () {
 	var socket = io();
-	socket.join('main');
 
     $("#createRoom").click( function(){
     	socket.emit('updateRooms');
