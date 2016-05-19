@@ -179,12 +179,12 @@ io.on('connection', function(socket){
 			console.log('you have already created a room');
 			var room = rooms[11111];
 			room.addPerson(socket.id);
-   						people[socket.id].inroom = 11111;
-   						room.number = (room.number + 1); //update number of people in room
-   						people[socket.id].colorChoice = colorChoices[room.number];
-   						socket.room = room.name;
-   						socket.join(socket.room);
-   						console.log('Joiner joiend room: ' + socket.room);
+   			people[socket.id].inroom = 11111;
+   			room.number = (room.number + 1); //update number of people in room
+   			people[socket.id].colorChoice = colorChoices[room.number];
+   			socket.room = room.name;
+   			socket.join(socket.room);
+   			console.log('Joiner joiend room: ' + socket.room);
 			// socket.sockets.emit("update", "You have already created a room.");
 		}
 	});
