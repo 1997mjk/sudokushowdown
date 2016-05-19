@@ -9,28 +9,26 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <title>Sudoku Showdown</title>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="js/home.js"></script>
-    
+
     <!-- Bootstrap Core CSS -->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Timeline CSS -->
-    <link href="dist/css/timeline.css" rel="stylesheet">
+    <link href="../dist/css/timeline.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="bower_components/morrisjs/morris.css" rel="stylesheet">
+    <link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,7 +36,13 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+    <script type="text/javascript">
+    function createRoom() {
+        var roomDiv = "<li><div class='panel panel-primary'><div class='panel-heading'><div class='row'><div class='col-xs-4'><i class='fa fa-users fa-5x'></i></div><div class='col-xs-4 text-center'><div class='huge'>"+ $(boardDimension).val() +"</div></div><div class='col-xs-4 text-right'><div class='huge'>1/"+ $(playerNumber).val() +"</div><div>Creator: JohnCena</div></div></div></div><a href='#''><div class='panel-footer'><span class='pull-left'>Join Game!</span><span class='pull-right'><i class='fa fa-arrow-circle-right'></i></span><div class='clearfix'></div></div></a></div></li>";
+        // var roomDiv = "<div>MumeiLover404</div>";
+        $(roomDiv).hide().appendTo("#activeRoomsTimeline").fadeIn(1000);
+    }
+    </script>
 </head>
 
 <body>
@@ -54,7 +58,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Sudoku Showdown</a>
+                <a class="navbar-brand" href="index.html">Sudoku Showdown</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -300,19 +304,19 @@
                                         
                                             <ul>
                                                 <li>
-                                                    <span id='username'>Username: <%= user %></span>
+                                                    <span>Wins:</span>
                                                 </li>
                                                 <li>
-                                                    <span id='win'>Wins: <%= win %></span>
+                                                    <span>Loses:</span>
                                                 </li>
                                                 <li>
-                                                    <span id='draw'>Ties: <%= draw %></span>
+                                                    <span>Ties:</span>
                                                 </li>
                                                 <li>
-                                                    <span id='loss'>Losses: <%= loss %></span>
+                                                    <span>Games Played:</span>
                                                 </li>
                                                 <li>
-                                                    <span id='mmr'>MMR: <%= MMR %></span>
+                                                    <span>Time Spent:</span>
                                                 </li>
                                             </ul>
                                             <!-- /.table-responsive -->
@@ -334,11 +338,11 @@
                         </li>
                         <li>
                             <span>Board Dimensions</span>
-                            <select class="form-control">
-                                <option value="one">9x9</option>
-                                <option value="two">16x16</option>
-                                <option value="three">25x25</option>
-                                <option value="four">Samurai</option>                        
+                            <select class="form-control" id="boardDimension">
+                                <option value="9x9">9x9</option>
+                                <option value="16x16">16x16</option>
+                                <option value="25x25">25x25</option>
+                                <option value="Samurai">Samurai</option>                        
                             </select>
                         </li>
                         <li>
@@ -346,19 +350,19 @@
                         </li>
                         <li>
                             <span>Max Players</span>
-                            <select class="form-control">
-                                <option value="one">1 Player</option>
-                                <option value="two">2 Players</option>
-                                <option value="three">3 Players</option>
-                                <option value="four">4 Players</option>
-                                <option value="five">5 Players</option>
+                            <select class="form-control" id="playerNumber">
+                                <option value="1">1 Player</option>
+                                <option value="2">2 Players</option>
+                                <option value="3">3 Players</option>
+                                <option value="4">4 Players</option>
+                                <option value="5">5 Players</option>
                             </select>
                         </li>
                         <li>
                             <br>
                         </li>
                         <li>
-                            <button type="button" class="btn btn-primary btn-lg btn-block" id="createRoom">Create Room!</button>
+                            <button type="button" class="btn btn-primary btn-lg btn-block" onclick ="createRoom()">Create Room!</button>
                         </li>
                     </ul>
                 </div>
@@ -396,7 +400,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <ul class="timeline">
+                            <ul class="timeline" id="activeRoomsTimeline">
                                 <li>
                                     <!-- <div class="timeline-badge"><i class="fa fa-play-circle"></i>
                                     </div> -->
@@ -404,12 +408,15 @@
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
                                             <div class="row">
-                                                <div class="col-xs-3">
+                                                <div class="col-xs-4">
                                                     <i class="fa fa-users fa-5x"></i>
                                                 </div>
-                                                <div class="col-xs-9 text-right">
+                                                <div class="col-xs-4 text-center">
+                                                    <div class="huge">9x9</div>
+                                                </div>
+                                                <div class="col-xs-4 text-right">
                                                     <div class="huge">1/2</div>
-                                                    <div>Creator: Gabor the God</div>
+                                                    <div>Creator: Minjae Kwon</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -430,11 +437,14 @@
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
                                             <div class="row">
-                                                <div class="col-xs-3">
+                                                <div class="col-xs-4">
                                                     <i class="fa fa-users fa-5x"></i>
                                                 </div>
-                                                <div class="col-xs-9 text-right">
-                                                    <div class="huge">2/4</div>
+                                                <div class="col-xs-4 text-center">
+                                                    <div class="huge">16x16</div>
+                                                </div>
+                                                <div class="col-xs-4 text-right">
+                                                    <div class="huge">1/3</div>
                                                     <div>Creator: Jason Thomas</div>
                                                 </div>
                                             </div>
@@ -449,132 +459,7 @@
                                     </div>
                                     <!-- INSERTED CODE -->
                                 </li>
-                                <li>
-                                    <!-- <div class="timeline-badge danger"><i class="fa fa-bomb"></i>
-                                    </div> -->
-                                    <!-- INSERTED CODE -->
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <i class="fa fa-users fa-5x"></i>
-                                                </div>
-                                                <div class="col-xs-9 text-right">
-                                                    <div class="huge">4/5</div>
-                                                    <div>Creator: MumeiLover404</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="#">
-                                            <div class="panel-footer">
-                                                <span class="pull-left">Join Game!</span>
-                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <!-- INSERTED CODE -->
-                                </li>
-                                <li class="timeline-inverted">
-                                    <!-- INSERTED CODE -->
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <i class="fa fa-users fa-5x"></i>
-                                                </div>
-                                                <div class="col-xs-9 text-right">
-                                                    <div class="huge">2/3</div>
-                                                    <div>Creator: BoannaBlast666</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="#">
-                                            <div class="panel-footer">
-                                                <span class="pull-left">Join Game!</span>
-                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <!-- INSERTED CODE -->
-                                </li>
-                                <li>
-                                    <!-- <div class="timeline-badge info"><i class="fa fa-save"></i>
-                                    </div> -->
-                                    <!-- INSERTED CODE -->
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <i class="fa fa-users fa-5x"></i>
-                                                </div>
-                                                <div class="col-xs-9 text-right">
-                                                    <div class="huge">1/5</div>
-                                                    <div>Creator: JohnCena</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="#">
-                                            <div class="panel-footer">
-                                                <span class="pull-left">Join Game!</span>
-                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <!-- INSERTED CODE -->
-                                </li>
-                                <li>
-                                    <!-- INSERTED CODE -->
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <i class="fa fa-users fa-5x"></i>
-                                                </div>
-                                                <div class="col-xs-9 text-right">
-                                                    <div class="huge">1/4</div>
-                                                    <div>Creator: ChuckNorris</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="#">
-                                            <div class="panel-footer">
-                                                <span class="pull-left">Join Game!</span>
-                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <!-- INSERTED CODE -->
-                                </li>
-                                <li class="timeline-inverted">
-                                    <div class="timeline-badge success"><i class="fa fa-graduation-cap"></i>
-                                    </div>
-                                    <!-- INSERTED CODE -->
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <i class="fa fa-users fa-5x"></i>
-                                                </div>
-                                                <div class="col-xs-9 text-right">
-                                                    <div class="huge">2/4</div>
-                                                    <div>Creator: KappaMonster329</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="#">
-                                            <div class="panel-footer">
-                                                <span class="pull-left">Join Game!</span>
-                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <!-- INSERTED CODE -->
-                                </li>
+                                
                             </ul>
                         </div>
                         <!-- /.panel-body -->
@@ -773,21 +658,21 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="bower_components/raphael/raphael-min.js"></script>
+    <script src="../bower_components/raphael/raphael-min.js"></script>
    <!--  <script src="../bower_components/morrisjs/morris.min.js"></script> -->
     <!-- <script src="../js/morris-data.js"></script> -->
 
     <!-- Custom Theme JavaScript -->
-    <script src="dist/js/sb-admin-2.js"></script>
+    <script src="../dist/js/sb-admin-2.js"></script>
 
 </body>
 

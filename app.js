@@ -178,6 +178,10 @@ io.on('connection', function(socket){
 			// socket.sockets.emit("update", "You have already created a room.");
 		}
 	});
+	socket.on('roomCreation', function(){
+		io.sockets.emit('updateRooms');
+
+	});
 
 	socket.on('joinRoom', function(id){
 		var room = rooms[id];
