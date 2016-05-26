@@ -7,7 +7,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var passportLocal = require('passport-local');
-var flash = require('connect-flash');
+//var flash = require('connect-flash');
 var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io').listen(http);
@@ -33,17 +33,13 @@ var userSchema = mongoose.Schema({
 	MMR: String
 });
 userSchema.methods.validPassword = function( pwd ) {
-    // EXAMPLE CODE!
     return ( this.password === pwd );
 };
 var User = mongoose.model('Users', userSchema);
 
-
 //===============================================
 //================CONFIGURATION==================
 //===============================================
-
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -150,7 +146,7 @@ app.post('/signup', function(req,res){
 var people = {}; 
 var rooms = {};
 var clients = [];
-var fuck = 0
+var numberIn = 0
 
 var colorChoices = ['#FF0000', '#FF7F00', '#0000FF', '#4B0082', '#008000'];
 //red, orange, blue, purple, dark green
@@ -158,7 +154,7 @@ var colorChoices = ['#FF0000', '#FF7F00', '#0000FF', '#4B0082', '#008000'];
 io.on('connection', function(socket){
 	socket.on('createRoom', function(name){
 		// if(people[socket.id].room === null){
-		if(fuck == 0){
+		if(numberIn == 0){
 			// var id = uuid.v4();
 			var id = 11111;
 			console.log('uuid generated: ' + id);
@@ -171,7 +167,7 @@ io.on('connection', function(socket){
 		    people[socket.id].room = id; //update the room key with the ID of the created room
 		    people[socket.id].colorChoice = colorChoices[0]; 
 		    people[socket.id].inroom = id;
-		    fuck = fuck + 1;
+		    numberIn = numberIn + 1;
 		    console.log('Creator joiend room: ' + socket.room);
 
 		}else{
@@ -276,22 +272,12 @@ io.on('connection', function(socket){
 		var solution = "435269781682571493197834562826195347374682915951743628519326874248957136763418259";
         if(solution[index]==numberSubmitted){ //correct answer
         	console.log('correct answer received from: ' + socket.id + "at " + socket.room);
-        	//socket.broadcast.to(socket.room).emit('correct', [index, numberSubmitted]);
-        	//socket.to(socket.room).emit('correct', [index, numberSubmitted]);
-        	// socket.broadcast.emit('correct', [index, numberSubmitted]);
-        	// socket.emit('correct', [index, numberSubmitted]);
         	io.sockets.in(socket.room).emit('correct', [index, numberSubmitted], coloration);
         }
         else if(numberSubmitted != ''){ //wrong number entered
-        	// console.log(people[socket.id]);
-        	// var coloration = people[socket.id].colorChoice;
-        	// socket.broadcast.emit('incorrect', [index, numberSubmitted], coloration);
-        	// socket.emit('incorrect', [index, numberSubmitted], coloration);
         	io.sockets.in(socket.room).emit('incorrect', [index, numberSubmitted], coloration);
         }
         else{ //nothing entered
-        	// socket.broadcast.emit('empty', [index, numberSubmitted]);
-        	// socket.emit('empty', [index, numberSubmitted]);
         	io.sockets.in(socket.room).emit('empty', [index, numberSubmitted]);
         }
 	});
