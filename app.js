@@ -147,6 +147,7 @@ var people = {};
 var rooms = {};
 var clients = [];
 var numberIn = 0;
+var hi = 12;
 
 var colorChoices = ['#FF0000', '#FF7F00', '#0000FF', '#4B0082', '#008000'];
 //red, orange, blue, purple, dark green
